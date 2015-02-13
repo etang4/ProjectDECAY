@@ -2,7 +2,12 @@ fileFormatVersion: 2
 guid: 31c562bf9c2eb924eb288f5c12815193
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - mine: {fileID: 100000, guid: 70c743d0ab25b604597b005aeb5bbf9d, type: 2}
+  - swordPrefab: {instanceID: 0}
+  - currentSword: {instanceID: 0}
+  - cannonBallPrefab: {instanceID: 0}
+  - currentCannonBall: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

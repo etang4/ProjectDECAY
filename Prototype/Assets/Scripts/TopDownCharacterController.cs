@@ -3,8 +3,11 @@ using System.Collections;
 
 public class TopDownCharacterController : MonoBehaviour {
 
+	public GameObject mine;
+	private int numMines;
+
 	float mPlayerRotation;
-	float mMaxSpeed;
+	static float mMaxSpeed;
 	Vector2 velo;
 	enum WeaponModes: int{sword, gun}
 	int numOfWeaponModes =2;
@@ -13,6 +16,7 @@ public class TopDownCharacterController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		numMines = 3;
 		mPlayerRotation= 0;
 		mMaxSpeed = 20;
 		velo = Vector2.zero;
@@ -23,6 +27,17 @@ public class TopDownCharacterController : MonoBehaviour {
 	void Update () {
 		Move();
 		Weapons();
+		DropMine ();
+	}
+
+	/*player drops mine*/
+	void DropMine()
+	{
+		if (Input.GetKeyDown (KeyCode.Q) && numMines > 0)
+		{
+			Instantiate(mine, transform.position, transform.rotation);
+			numMines --;
+		}
 	}
 
 	void Move(){
@@ -79,6 +94,12 @@ public class TopDownCharacterController : MonoBehaviour {
 		currentCannonBall.transform.localPosition += new Vector3(0,0.75f,2.5f);
 		currentCannonBall.GetComponent<Rigidbody>().velocity = (gameObject.transform.forward+(Vector3.up *0.05f))* 40; 
 		currentCannonBall.transform.parent = null;
+	}
+
+	/*Set a new max speed for player*/
+	public static void SetMaxSpeed(float newSpeed)
+	{
+		mMaxSpeed = newSpeed;
 	}
 
 }

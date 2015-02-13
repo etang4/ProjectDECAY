@@ -4,16 +4,18 @@ using System.Collections;
 public class PlayerGetsHit : MonoBehaviour {
 
 	bool hurt;
-	int lifeRemaining;
+	float lifeRemaining;
 	float hurtStateTime;
 	float hurtStateTimeRemaining;
 	public MeshRenderer MRtoMessWith;
+	static float damageAmount;
 
 	// Use this for initialization
 	void Start () {
 		hurt = false;
-		lifeRemaining = 5;
+		lifeRemaining = 5f;
 		hurtStateTime = 2;
+		damageAmount = 1f;
 		hurtStateTimeRemaining = hurtStateTime;
 	}
 	
@@ -23,9 +25,15 @@ public class PlayerGetsHit : MonoBehaviour {
 			countdownHurtTime();
 		}
 	}
+
+	public static void SetDamage(float newDamage)
+	{
+		damageAmount = newDamage;
+	}
+
 	void OnTriggerEnter(Collider collider) {
 		if(collider.gameObject.tag =="enemy"&& !hurt){
-			lifeRemaining--;
+			lifeRemaining -= damageAmount;
 			if(lifeRemaining<=0){
 				Debug.Log("YOU DIED");
 				Destroy(this.gameObject);
