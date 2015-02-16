@@ -4,7 +4,7 @@ using System.Collections;
 public class PlayerGetsHit : MonoBehaviour {
 
 	bool hurt;
-	int lifeRemaining;
+	float lifeRemaining;
 	float hurtStateTime;
 	float hurtStateTimeRemaining;
 	public MeshRenderer MRtoMessWith;
@@ -24,8 +24,9 @@ public class PlayerGetsHit : MonoBehaviour {
 		}
 	}
 	void OnTriggerEnter(Collider collider) {
-		if(collider.gameObject.tag =="enemy"&& !hurt){
-			lifeRemaining--;
+		if(!hurt){
+			if(collider.gameObject.tag =="enemy") lifeRemaining-=1;
+			if(collider.gameObject.tag =="enemyCrow") lifeRemaining-=0.5f;
 			if(lifeRemaining<=0){
 				Debug.Log("YOU DIED");
 				Destroy(this.gameObject);
