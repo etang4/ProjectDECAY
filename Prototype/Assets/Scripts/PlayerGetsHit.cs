@@ -4,7 +4,7 @@ using System.Collections;
 public class PlayerGetsHit : MonoBehaviour {
 
 	bool hurt;
-	float lifeRemaining;
+	static float lifeRemaining;
 	float hurtStateTime;
 	float hurtStateTimeRemaining;
 	public MeshRenderer MRtoMessWith;
@@ -31,8 +31,14 @@ public class PlayerGetsHit : MonoBehaviour {
 		damageAmount = newDamage;
 	}
 
+//NEED TO HAVE A CATCH FOR GOING OVER MAX LIFE
+	public static void IncreaseLife(float increase)
+	{
+		lifeRemaining += increase;
+	}
+
 	void OnTriggerEnter(Collider collider) {
-		if(collider.gameObject.tag =="enemy"&& !hurt){
+		if((collider.gameObject.tag =="enemy" || collider.gameObject.tag == "carnivore")&& !hurt){
 			lifeRemaining -= damageAmount;
 			if(lifeRemaining<=0){
 				Debug.Log("YOU DIED");
