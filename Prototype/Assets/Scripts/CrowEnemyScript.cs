@@ -11,7 +11,6 @@ public class CrowEnemyScript : MonoBehaviour {
 	void Start () {
 		currentState = eBehaviourState.wait;
 		reportStateChange();
-		numberOfCrows++;//maybe use count to determine whether stuff should be made
 	}
 	
 	public GameObject characterObject;
@@ -88,6 +87,7 @@ public class CrowEnemyScript : MonoBehaviour {
 
 	float reproductionTimeFrame = 2;
 	float reproductionCountup = 0;
+	int maxNumberOfCrows = 8;
 	void reproduce(){
 		// pause, go through animation and create new one
 		reproductionCountup+=Time.deltaTime;
@@ -106,6 +106,7 @@ public class CrowEnemyScript : MonoBehaviour {
 				rayDirection=possibleDirections[directionIndex];
 				Debug.Log("Trying to reproduce in direction: " + rayDirection);
 				if (!Physics.Raycast(transform.position, rayDirection, 20)){
+					if(GameObject.FindGameObjectsWithTag("enemyCrow").Length< maxNumberOfCrows)
 					Instantiate(gameObject, gameObject.transform.position+ (13*rayDirection), gameObject.transform.rotation);
 					hasGivenBirth = true;//break out
 				}

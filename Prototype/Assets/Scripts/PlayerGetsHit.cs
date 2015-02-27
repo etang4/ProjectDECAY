@@ -24,7 +24,7 @@ public class PlayerGetsHit : MonoBehaviour {
 		}
 	}
 	void OnTriggerEnter(Collider collider) {
-		if(!hurt){
+		if(!hurt && (collider.gameObject.tag =="enemy" || collider.gameObject.tag =="enemyCrow" )){
 			if(collider.gameObject.tag =="enemy") lifeRemaining-=1;
 			if(collider.gameObject.tag =="enemyCrow") lifeRemaining-=0.5f;
 			if(lifeRemaining<=0){
